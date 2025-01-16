@@ -1,7 +1,10 @@
-body {background-color: #E38E49;}
-div {background-color: #D4EBF8;
-    margin: 0 auto; 
-    border-radius: 10em;}
-h1 {color: #0A3981;}
-div {margin: 30px;}
-.p1, .p2, .p3 {color: #E38E49;}
+body {
+    background-color: #E38E49;}
+div {
+    background-color: #D4EBF8;
+    margin: 30px auto;
+    border-radius: 10px;}
+h1 {
+    color: #0A3981;}
+.p1, .p2, .p3 {
+    color: #E38E49;}
