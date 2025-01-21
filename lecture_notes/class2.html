@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        div {
+            width: 200px;
+            border-radius: 50%;
+            background-color: lightblue;
+            padding: 100px 0;
+            line-height:0px;
+            text-align: center;
+            transition: 1s;
+            margin: 0 auto;}
+
+        div:hover {
+            background-color: darkblue;
+            transform: rotate(360deg);
+            color: white;}
+        
+        img {
+            position: absolute;
+            animation-name: otto;
+            animation-duration: 3s;
+            animation-fill-mode: forwards;}
+        
+        @keyframes otto {
+           from {transform: translatex(-200px)}
+           to {transform: translatex(1500px);}}
+    
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transitions</title>
+</head>
+<body>
+    <div> 
+        Go Orange
+    </div>
+
+    <img src="https://laferger.github.io/ist363/images/otto-on-skateboard.png " alt="">
+</body>
+</html>
