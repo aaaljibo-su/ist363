@@ -1,0 +1,46 @@
+body {
+    background-color: #E38E49;
+}
+
+
+.textandimages{ 
+    background-color: #D4EBF8;
+    padding: 50px 300px 50px 300px ;
+    margin: 20px;
+    border-radius: 40px;;
+}
+
+h1 {
+    color: #0A3981;
+    position: relative;
+    top: -100px; 
+    animation: 
+    slideDown 1.5s ease-in-out forwards, 
+    flip 1s 1.5s ease-in-out forwards, 
+    pulse 1s 2.5s ease-in-out forwards;
+}
+
+.flex1 {
+    display: flex;
+    justify-content: center;
+}
+        
+img {
+    width: 100%;
+}
+
+@keyframes slideDown {
+    from {top: -100px;}
+    to {top: 0px;}
+}
+
+@keyframes flip {
+    from {transform: rotateY(0deg);}
+    to {transform: rotateY(360deg);}
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); } 
+    100% { transform: scale(1); } 
+}
