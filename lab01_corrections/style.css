@@ -1,0 +1,21 @@
+body {
+    background-color: #E38E49;}
+
+
+.textandimages{ 
+    background-color: #D4EBF8;
+    padding: 50px 300px 50px 300px ;
+    margin: 20px;
+    border-radius: 40px;;
+}
+
+h1 {
+    color: #0A3981;}
+
+.flex1 {
+    display: flex;
+    justify-content: center;}
+        
+img {
+    width: 100%;}
+
