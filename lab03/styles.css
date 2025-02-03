@@ -1,0 +1,224 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.latest-recipes .recipes-grid .recipe, .older-recipes .recipes-grid .recipe {
+  flex: 1;
+  text-align: center;
+}
+.latest-recipes .recipes-grid .recipe img, .older-recipes .recipes-grid .recipe img {
+  width: 100%;
+  border-radius: 10px;
+}
+.latest-recipes .recipes-grid .recipe p, .older-recipes .recipes-grid .recipe p {
+  font-weight: bold;
+  color: #e2625c;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+h2 {
+  color: #e2625c;
+  font-size: 1.5em;
+}
+
+header {
+  background-color: #e89b6a;
+  color: #ffffff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+header nav {
+  display: flex;
+  flex-direction: row; /* Keep navigation links horizontal */
+  gap: 15px;
+  word-spacing: 1px;
+  padding: 5px;
+}
+header h1 {
+  font-size: 2em;
+  padding-bottom: 5px;
+}
+
+.latest-recipes, .older-recipes {
+  padding: 30px;
+  color: #e2625c;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.latest-recipes h2, .older-recipes h2 {
+  text-align: left;
+  width: 200px;
+}
+.latest-recipes .recipes-grid, .older-recipes .recipes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.latest-recipes .recipes-grid .recipe, .older-recipes .recipes-grid .recipe {
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  margin-left: 0;
+}
+.latest-recipes .recipes-grid .recipe p, .older-recipes .recipes-grid .recipe p {
+  padding: 30px;
+}
+
+.newsletter {
+  margin: 28px;
+  background-color: #e4fdc3;
+  padding: 30px;
+  border-radius: 1em;
+}
+.newsletter img {
+  width: 70px;
+  padding-bottom: 10px;
+}
+.newsletter input {
+  padding: 10px;
+  margin-top: 10px;
+  width: 250px;
+  border: 1px solid #e89b6a;
+  border-radius: 5px;
+}
+.newsletter button {
+  padding: 10px;
+  margin-left: 10px;
+  background-color: #e89b6a;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.newsletter button:hover {
+  background-color: #e2625c;
+}
+
+.about {
+  padding: 30px;
+  border-radius: 1em;
+}
+.about img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 1em;
+  padding-bottom: 30px;
+}
+.about p {
+  padding: 25px;
+}
+.about button {
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #e89b6a;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+.about button:hover {
+  background-color: #8ae2c8;
+}
+
+footer {
+  background-color: #8ae2c8;
+  padding: 20px;
+  color: #ffffff;
+  text-align: center;
+}
+footer nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 15px;
+  padding: 5px;
+  padding-top: 10px;
+}
+footer nav a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+header nav a, footer nav a {
+  display: inline-block;
+  transition: transform 0.3s ease-in-out;
+}
+header nav a:hover, footer nav a:hover {
+  transform: scale(1.2);
+}
+
+@media screen and (max-width: 768px) {
+  .latest-recipes, .older-recipes {
+    flex-direction: column;
+  }
+  .recipes-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  .recipe {
+    width: 80%;
+    max-width: 300px;
+  }
+  .newsletter input {
+    width: 90%;
+  }
+  .about img {
+    max-height: 250px;
+  }
+}/*# sourceMappingURL=styles.css.map */

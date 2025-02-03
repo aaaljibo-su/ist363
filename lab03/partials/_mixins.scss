@@ -1,0 +1,16 @@
+@mixin flex-center($justify: center) {
+    display: flex;
+    justify-content: $justify;
+    align-items: center;
+  }
+  
+  @mixin button-style($bg-color, $text-color: white) {
+    padding: 10px;
+    background-color: $bg-color;
+    border: none;
+    color: $text-color;
+    cursor: pointer;
+    &:hover {
+      background-color: lighten($bg-color, 10%);
+    }
+  }
