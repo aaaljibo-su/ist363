@@ -1,0 +1,27 @@
+@import "reset";
+
+$heading_color: #037703;
+$main_font:Arial, Helvetica, sans-serif;
+
+h1 {color: $heading_color;}
+
+@mixin warning {
+    color: blue;
+    background-color: aquamarine;
+}
+
+.danger {
+    @include warning;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.jumbotron {
+    width: 100%;
+    background-color: lightblue;
+    border: 2px sold blue;
+}
+
+.jumbotron_about {
+    @extend .jumbotron;
+    color: #333333;
+}

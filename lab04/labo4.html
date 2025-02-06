@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lab04</title>
+    <script src="https://cdn.tailwindcss.com"></script> 
+</head>
+<body class="bg-slate-50">
+
+    <header class="bg-indigo-950 p-5 flex items-center justify-between">
+        <h1 class="font-bold text-2xl"> 
+            <span class="text-yellow-400" >Orange</span> 
+            <span class="text-white">News</span>
+        </h1>
+        <nav class="text-white text-xs space-x-1 hidden md:block">
+            <a class="hover:text-sm">Home</a>
+            <a class="hover:text-sm">Latest</a>
+            <a class="hover:text-sm">Scores</a>
+            <a class="hover:text-sm">Videos</a>
+            <a class="hover:text-sm">More</a>
+        </nav>
+    </header>
+    <section class="m-10">
+
+        <!--News Story-->
+        <div class="bg-gray-800 rounded-md pb-6">
+            <img class=" rounded-md h-96 w-full object-cover" src="images4/campus.jpg" alt="Campus">
+            <div>
+                <h1 class="text-white font-bold text-lg pl-3 pt-4 ">Will the Snow Ever Thaw?</h1>
+                <p class="text-white text-sm font-extralight pl-3">Get the latest scoop on the weather and everything that effects the jet stream.</p>
+            </div>
+        </div>
+
+        <!--Stories-->
+        <div class="mt-7">
+            <h1 class="font-medium pt-6 text-lg">More Features Stories</h1>
+            <div class="flex flex-col lg:flex-row md:flex-row gap-6 pt-6 ">
+
+                <div class="bg-white rounded-md shadow-md overflow-hidden">
+                    <img class="w-full object-contain" src="images4/graduates.jpg" alt="Graduation">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg">Graduation 2025</h3>
+                        <p class="">Invite your friends and family to join us in May.</p>
+                    </div>
+                </div>
+            
+                <div class="bg-white rounded-md shadow-md overflow-hidden">
+                    <img class="w-full object-contain" src="images4/runners.jpg" alt="Workplace Run">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg">Workplace Run</h3>
+                        <p class="">Run a 5k with your colleagues.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-md shadow-md overflow-hidden">
+                    <img class="w-full object-contain" src="images4/artshow.jpg" alt="Art Show">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg">Art Show</h3>
+                        <p class="">The best art of the year on display at Schaffer.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!--Game scores and Headlines-->
+        <div class="md:flex flex-row gap-6 mt-7">
+
+            <!--Headlines-->
+            <div class="flex-1">
+
+                <h1 class="font-medium pt-6 text-lg">Top Headlines</h1>
+                <div class="bg-white rounded-md shadow-md overflow-hidden mt-4">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg">Player X Breaks Record</h3>
+                        <p class="">The record-breaking performance from Player X stunned fans everywhere...</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-md shadow-md overflow-hidden mt-4">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg">Team Y Wins Championship</h3>
+                        <p class="">In an epic showdown, Team Y comes out on top with a historic victory...</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-md shadow-md overflow-hidden mt-4">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg">Athlete Z Announces Retirement</h3>
+                        <p class="">Athlete Z's retirement shocked the sports world...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!--Game scores-->
+            <div class="flex-1"> 
+                <h2 class="font-medium pt-6 text-lg">Game Scores</h2>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden mt-4">
+                    <table class="w-full">
+                        <thead class=" border-b">
+                            <tr>
+                                <th class="text-left font-bold p-4">Game</th>
+                                <th class="text-right font-bold p-4">Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-4">Women's Hockey vs Miami</td>
+                                <td class="p-4 text-right">3 - 1</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4">Men's Lacrosse vs St Bonaventure</td>
+                                <td class="p-4 text-right">7 - 18</td>
+                            </tr>
+                            <tr>
+                                <td class="p-4">Men's Basketball vs Duke</td>
+                                <td class="p-4 text-right">98 - 75</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+
+        <!--Subsribe-->
+        <div class="bg-indigo-950 mt-14 rounded-md pb-6">
+            <h1 class="text-white font-bold text-lg pl-3 pt-4 ">Subscribe to our Newsletter</h1>
+            <p class="text-white text-sm font-extralight pl-3 mt-3">Stay updated with the latest news, scores, and exclusive content delivered straight to your inbox!</p>
+            <div class="ml-2 mt-2">
+                <input 
+                    type="email" 
+                    placeholder="Enter your email" 
+                    class="p-3 w-3/4 rounded-md border-none text-gray-900">
+            </div>
+            <button class="bg-yellow-400 text-black font-bold px-6 py-3 rounded-md ml-2 mt-1 w-2/6">
+                Subscribe
+            </button>
+        </div>
+    </section>
+
+</body>
+</html>

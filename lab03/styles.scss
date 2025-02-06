@@ -44,7 +44,7 @@
     text-align: center;
     nav {
       display: flex;
-      flex-direction: row; /* Keep navigation links horizontal */
+      flex-direction: row;
       gap: 15px;
       word-spacing: 1px;
       padding: 5px;
@@ -60,12 +60,12 @@
     padding: 30px;
     color: $melon;
     display: flex;
-    align-items: center; // Align text with images
-    gap: 20px; // Add spacing between text and images
+    align-items: center; 
+    gap: 20px; 
 
     h2 {
       text-align: left;
-      width: 200px; // Adjust width so it doesn’t stretch too far
+      width: 200px; 
     }
   
     .recipes-grid {
@@ -76,7 +76,7 @@
       .recipe {
         @extend %recipe-box;
         border-radius: 10px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); // Subtle shadow
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
         background: #ffffff;
         margin-left: 0;
         p{
