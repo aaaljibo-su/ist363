@@ -1,13 +1,14 @@
 $primary: #d7e8fd;
+$success: #001f3f;
+$danger: #2500ba;
 
-input, button, textfield{
-    -webkit-appearance: none; /* For Safari & Chrome */
-    -moz-appearance: none;    /* For Firefox */
-    appearance: none;         /* Standard property */
-  }
 @import "../../bootstrap-5.3.3-dist/scss/bootstrap.scss";
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
 
-.navbar, .footer { background-color: #001f3f; }
-h1, h3 { color: #2500ba; }
-.yellow-star { color: #ffdd00; }
+
+.yellow-star { color: #ffdd00;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #d7e8fd !important;
+}

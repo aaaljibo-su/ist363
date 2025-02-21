@@ -7,9 +7,8 @@
     <link href="stylesheet.css" rel="stylesheet">
 </head>
 <body>
-
 <!-- Nav Bar -->
-<nav class="navbar navbar-dark navbar-expand-lg">
+<nav class="navbar navbar-dark bg-success navbar-expand-lg">
     <div class="container-lg px-5">
         <a class="navbar-brand" href="#">
             <img src="images5/logo_small.png" alt="Logo">
@@ -30,7 +29,7 @@
 
 <!-- Portfolio Section -->
 <div class=" text-center mt-5">
-    <h1 class="display-6">Photographer's Portfolio</h1>
+    <h1 class=" text-danger display-6">Photographer's Portfolio</h1>
     <div id="portfolioCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -72,7 +71,12 @@
 
 <!-- Customer Reviews -->
 <div class="container-fluid bg-primary py-5 mt-5">
-    <h3 class="text-center">&#10024; Customer Reviews</h3>
+    <h3 class=" text-danger text-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" fill="currentColor" class="bi bi-stars" viewBox="0 0 16 16">
+            <path d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"/>
+          </svg>
+        Customer Reviews
+      </h3>
     <div class="row">
         <div class="col-md-4">
             <div class="card p-3">
@@ -97,7 +101,7 @@
 
 <!-- FAQs Section -->
 <div class="mt-5">
-    <h3>FAQs</h3>
+    <h3 class="text-danger"> FAQs</h3>
 
 
 <div class="accordion" id="accordionExample">
@@ -137,11 +141,23 @@
         </div>
       </div>
     </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFour">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              Do you sell art?
+          </button>
+        </h2>
+        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+              Yes, I sell art.
+          </div>
+        </div>
+      </div>
   </div>
 
 <!-- Get in Touch Form -->
 <div class=" bg-primary text-center py-5 mt-5">
-    <h3>Get in Touch</h3>
+    <h3 class="text-danger">Get in Touch</h3>
     <p>Questions to ask? Fill out the form to contact me directly...</p>
     <form class="w-50 mx-auto">
         <div class="mb-3 text-start">
@@ -149,7 +165,7 @@
             <div class="input-group">
                 <span class="input-group-text"><i class="bi bi-envelope"></i></span>
                 <input type="email" class="form-control" placeholder="e.g. mario@example.com">
-                <span class="input-group-text" data-bs-toggle="tooltip" title="Enter a valid email"></span>
+                <span class="input-group-text" data-bs-toggle="tooltip" title="Enter a valid email">&#63;</span>
             </div>
         </div>
         <br>
@@ -183,7 +199,7 @@
 </div>
 
 
-<footer class="footer py-3 text-white mt-5">&copy; 2025</footer>
+<footer class="bg-success py-3 text-white mt-5">&copy; 2025</footer>
 <script src="../../bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
