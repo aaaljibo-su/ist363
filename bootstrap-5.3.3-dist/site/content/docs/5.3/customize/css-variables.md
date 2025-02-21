@@ -21,7 +21,9 @@ These CSS variables are available everywhere, regardless of color mode.
 ```css
 {{< root.inline >}}
 {{- $css := readFile "dist/css/bootstrap.css" -}}
+{% raw %}
 {{- $match := findRE `:root,\n\[data-bs-theme=light\] {([^}]*)}` $css 1 -}}
+{% endraw %}
 
 {{- if (eq (len $match) 0) -}}
 {{- errorf "Got no matches for :root in %q!" $.Page.Path -}}
