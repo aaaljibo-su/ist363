@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Examples</title>
+    <!--include an external file-->
+    <script src="example.js"></script>
+</head>
+<body>
+    <!--this is how you include JS internally-->
+
+    <script>
+        let GPA = 3.4;
+        let max = 3.5;
+        let min = 3.4;
+        let deanList; // Declaring the variable
+
+        if (GPA >= max) {
+            deanList = true;
+        } 
+        else if (GPA <= min) {
+            deanList = false;
+        }
+
+        console.log(deanList);
+    </script>
+
+    <script>
+        let dogAge = 14;
+        let type = "cat";
+        let petAge; //saying i am going to use this variable
+        if (type == "dog"){
+            petAge = dogAge * 7;
+        } 
+        else if (type == "cat") {
+            petAge = dogAge * 4;
+        }
+        console.log(petAge);
+    </script>
+    
+    <script>
+        console.log("Hello World");
+
+        let firstName = "alba";
+        let age = 29;
+        let isIschool = true;
+
+        console.log(firstName);
+        console.log(age);
+        console.log(isIschool);
+
+        let x = 2*2034;
+        console.log(x);
+        console.log(1 == 2)
+        console.log(0 && 1); // && means and - F and T = false
+        console.log(0 || 1); // || means or - F or T = true
+        // console.log (10 == 20 ||  );
+    </script>
+</body>
+</html>
