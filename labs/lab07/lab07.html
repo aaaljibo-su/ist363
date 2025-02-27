@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 07</title>
+</head>
+<body>
+    <script>
+        // #1
+        let favNumber = 5;
+        console.log("My favorite number is " + favNumber + ".");
+
+
+        // #2
+        let favoriteFoods = ["Pasta", "Sushi", "Brownies", "Ice Cream"];
+        console.log(favoriteFoods[1]); 
+        favoriteFoods.push("Burgers");
+        console.log(favoriteFoods);
+
+
+        // #3
+        for (let i = 0; i < favoriteFoods.length; i++) {
+            console.log("Favorite Food " + (i + 1) + ": " + favoriteFoods[i]);
+        }
+
+
+        // #4
+        for (let i = 0; i < favoriteFoods.length; i++) {
+            if (i === 1) {
+                continue;
+            }
+            console.log("Favorite Food " + (i + 1) + ": " + favoriteFoods[i]);
+        }
+
+
+        // #5
+        let book = {
+        title: "The Kite Runner",
+        author: "Khaled Hosseini",
+        yearPublished: 1925,
+        isAvailable: true
+        };
+        console.log("Title: " + book.title);
+        console.log("Author: " + book.author);
+        if (book.isAvailable) {
+            console.log("This book is available for checkout.");
+        } else {
+            console.log("Sorry, this book is currently checked out.");
+        }
+
+
+        // #6
+        let num = 2;
+        while (num <= 20) {
+            console.log(num);
+            num += 2;
+        }
+
+        
+        // #7
+        let diceRoll = Math.floor(Math.random() * 6) + 1;
+        console.log(diceRoll);
+
+    </script>
+</body>
+</html>
