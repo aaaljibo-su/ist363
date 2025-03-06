@@ -51,32 +51,43 @@
     </div>
 
         <script>
-                let monsterShield = 100;
-                let girlShield = 100;
+            // Mine
+                    let monsterShield = 100;
+                    let girlShield = 100;
 
-                document.querySelector("button").addEventListener("click", playGame);
+                    document.querySelector("button").addEventListener("click", playGame);
 
-                function playGame() {
-                    animateFireball();
+                    function playGame() {
+                        animateFireball();
 
-                    let monsterThrow = Math.floor(Math.random() * 20) + 1;
-                    let girlThrow = Math.floor(Math.random() * 20) + 1;
+                        let monsterThrow = Math.floor(Math.random() * 20) + 1;
+                        let girlThrow = Math.floor(Math.random() * 20) + 1;
 
-                    monsterShield -= girlThrow;
-                    girlShield -= monsterThrow;
+                        monsterShield -= girlThrow;
+                        girlShield -= monsterThrow;
 
-                    document.getElementById("mscore").innerText = Math.max(monsterShield, 0);
-                    document.getElementById("gscore").innerText = Math.max(girlShield, 0);
+                        document.getElementById("mscore").innerText = monsterShield;
+                        document.getElementById("gscore").innerText = girlShield;
 
-                    if (monsterShield <= 0 && girlShield <= 0) endGame("They both lost!");
-                    else if (monsterShield <= 0) endGame("Girl won!");
-                    else if (girlShield <= 0) endGame("Monster won!");
-                }
+                        if (monsterShield <= 0 && girlShield <= 0) {
+                        replaceWithBoom("monster");
+                        replaceWithBoom("girl");
+                        endGame("They both lost!");}
+                        else if (monsterShield <= 0) {
+                        endGame("Girl won!");
+                        replaceWithBoom("monster");}
+                        else if (girlShield <= 0) {
+                        endGame("Monster won!");
+                        replaceWithBoom("girl");}
+                    }
 
-                function endGame(message) {
-                    document.querySelector("button").remove();
-                    document.querySelector(".container").innerHTML += `<p>${message}</p>`;
-                }
+                    function replaceWithBoom(characterId) {
+                    document.getElementById(characterId).src = "images/boom.png";
+                    }
+                    function endGame(message) {
+                        document.querySelector("button").remove();
+                        document.querySelector(".container").innerHTML += `<p>${message}</p>`;
+                    }
 
             function animateFireball() {
 
