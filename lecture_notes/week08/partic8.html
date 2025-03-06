@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Years Calculator</title>
+</head>
+<body>
+
+    <form>
+        <input type="text" name="dogAge" value="">
+        <input type="submit" value="Calculate">
+    </form>
+
+    <p></p>
+
+    <script>
+        document.getElementsByTagName("form")[0].addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevents form from submitting
+
+            let dogAge = document.getElementsByTagName("input")[0].value;
+            let humanYears = dogAge * 7;
+
+            document.getElementsByTagName("p")[0].innerText = humanYears;
+        });
+    </script>
+
+</body>
+</html>

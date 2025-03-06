@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <!-- include an external file-->
+        <script src="week8tues.js"></script>
+</head>
+<body>
+    <p id="p1" class="odd">One</p>
+    <p class="even">Two</p>
+    <p class="odd">Three</p>
+
+    <form id="myForm">
+        <input type="text" name="fname" value="Alba">
+        <input type="text" name="lname" value="Aljiboury">
+        <input type="submit" value="send form">
+    </form>
+
+    <p>
+        <button id="myButton">Sign Up</button>
+    </p>
+
+    <script>
+        //dog years
+        let dogAge = 14;
+        let type = "cat";
+        let petAge; // saying I am going to use this variable
+        if (type == "dog") {
+            petAge = dogAge * 7;
+        } else if (type == "cat") {
+             petAge = dogAge * 4;
+        }
+        console.log(petAge);
+    </script>
+
+    <script>
+        function dogYears(years, dogName) {
+          //  let dy = years * 7;
+          //  return dy;  (OR DO THIS BELOW)
+          return years * 7;
+        }
+
+        // console.log(dogYears(14)); (OR DO BELOW)
+        let peopleAge = dogYears(14, 'Libby');
+        console.log(peopleAge);
+
+        // pick something by id and consol logging
+        let picked = document.getElementById('p1');
+        console.log(picked)
+
+        // pick by class and tag => returns arrey
+        console.log('Below is the log by tag');
+        let pTags = document.getElementsByTagName ('p');
+        for (i = 0; i < pTags.length; i++) {
+            console.log(pTags[1]);
+        }
+        
+        // getting element value from a form
+        console.log(document.getElementById('myForm').elements[0].value);
+
+        // changeing text and HTML in tags
+        document.getElementById('p1').innerHTML = 'four';
+        // chnage form value
+        document.getElementById('myForm').elements[0].value = 'Tota';
+        // change style
+        document.getElementById('p1').style.color = 'orange';
+        document.getElementById('p1').style.textDecoration = 'underline';
+        document.getElementsByTagName ('body')[0].style.backgroundColor = 'red';
+
+        document.getElementById('myButton').addEventListener('click', myFunction);
+
+        function myFunction () {
+            alert('Hello');
+        }
+
+    </script>
+
+</body>
+</html>
