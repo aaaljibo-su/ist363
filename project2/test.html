@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ATLA</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Spectral&display=swap');
+
+    body {
+      background-image: url(background.jpg);
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    .navbar, .footer {
+      background-color: #8ab4e1;
+    }
+
+    h1 {
+      text-align: center;
+      margin: -12px auto;
+      color: whitesmoke;
+      text-shadow: 2px 2px 6px #000000;
+      font-family: "Spectral", serif;
+    }
+
+    h2, .navbar-brand, .nav-link-custom {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 300;
+      color: whitesmoke;
+      text-shadow: 2px 2px 6px #000000;
+    }
+
+    .section-card {
+      background-color: #8ab4e1;
+      border-radius: 1em;
+      padding: 1%;
+    }
+
+    .character-card img {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .btn-custom {
+      background-color: #fdf6e3;
+      color: black;
+    }
+
+    .nav-link-custom:hover {
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light mb-4">
+    <div class="container">
+      <a class="navbar-brand" href="#">ATLA Explorer</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link nav-link-custom" href="#quote">Quote</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" href="#bending">Bending</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" href="#random-character">Characters</a></li>
+          <li class="nav-item"><a class="nav-link nav-link-custom" href="#tunes">Tunes</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main -->
+  <div class="container">
+    <h1 class="text-center mb-5">Welcome to the World of Avatar</h1>
+
+    <!-- Quote Section -->
+    <section id="quote" class="section-card mb-5">
+      <h2 class="text-center">Daily Iroh Wisdom</h2>
+      <blockquote class="blockquote">
+        <p id="quote-text" class="mb-0">Loading...</p><br />
+        <footer class="blockquote-footer" id="quote-author"></footer>
+      </blockquote>
+      <button class="btn btn-primary btn-custom mt-3" onclick="fetchQuote()" aria-label="Get new quote">Get New Quote</button>
+    </section>
+
+    <!-- Bending Grid -->
+    <section id="bending" class="section-card mb-5">
+      <h2 class="text-center">Bending Types</h2>
+      <div class="container my-4">
+        <div class="row text-center">
+          <div class="col-md-3 col-sm-6 mb-3">
+            <img src="https://media.giphy.com/media/F4w8zTcuwntv2/giphy.gif" class="img-fluid rounded" alt="waterbending">
+          </div>
+          <div class="col-md-3 col-sm-6 mb-3">
+            <img src="https://media.giphy.com/media/d0O4zETPaQC08/giphy.gif" class="img-fluid rounded" alt="firebending">
+          </div>
+          <div class="col-md-3 col-sm-6 mb-3">
+            <img src="https://media.giphy.com/media/yFWUUCVeZ0ttS/giphy.gif" class="img-fluid rounded" alt="earthbending">
+          </div>
+          <div class="col-md-3 col-sm-6 mb-3">
+            <img src="https://media.giphy.com/media/kUTevwxXSaqzK/giphy.gif" class="img-fluid rounded" alt="airbending">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Random Character Section -->
+    <section id="random-character" class="section-card mb-5">
+      <h2 class="text-center">Random Avatar Character</h2>
+      <div id="character-card" class="p-3 border rounded" style="background-color: #fdf6e3;"></div>
+      <button class="btn btn-primary btn-custom mt-3" onclick="fetchRandomCharacter()" aria-label="Get new character">Get New Character</button>
+    </section>
+
+    <!-- Spotify Playlist Section -->
+    <section id="tunes" class="section-card">
+      <h2 class="text-center">Avatar Tunes</h2>
+      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3bDOB6WgVzAmFDhjKHtVq7?utm_source=generator" width="100%" height="380" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="Avatar Spotify Playlist"></iframe>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer text-center py-4 mt-5">
+    <div class="container">
+      <p class="mb-0">&copy; 2025 | Alba Aljiboury | IST 363 Project 2</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    async function fetchRandomCharacter() {
+      try {
+        const response = await fetch("https://last-airbender-api.fly.dev/api/v1/characters/random?count=1");
+        const data = await response.json();
+        const character = data[0];
+
+        const imageUrl = character.photoUrl || 'https://via.placeholder.com/300x300?text=No+Image';
+
+        const cardHTML = `
+          <div class="card shadow-sm">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="${imageUrl}" alt="${character.name}" class="img-fluid rounded-start" style="object-fit: cover; height: 100%;">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h3 class="card-title">${character.name}</h3>
+                  <p class="card-text"><strong>Affiliation:</strong> ${character.affiliation || "Unknown"}</p>
+                  <p class="card-text"><strong>Allies:</strong> ${Array.isArray(character.allies) && character.allies.length ? character.allies.join(", ") : "None listed"}</p>
+                  <p class="card-text"><strong>Enemies:</strong> ${Array.isArray(character.enemies) && character.enemies.length ? character.enemies.join(", ") : "None listed"}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        document.getElementById("character-card").innerHTML = cardHTML;
+      } catch (error) {
+        console.error("Error fetching character:", error);
+        document.getElementById("character-card").innerHTML = "<p>Could not load character.</p>";
+      }
+    }
+
+    async function fetchQuote() {
+      try {
+        const response = await fetch("https://phplaravel-1209169-4369284.cloudwaysapps.com/api/quote");
+        const data = await response.json();
+
+        document.getElementById("quote-text").innerText = `"${data.contents}"`;
+        document.getElementById("quote-author").innerText = "Uncle Iroh";
+      } catch (error) {
+        console.error("Error fetching quote:", error);
+        document.getElementById("quote-text").innerText = "Could not load quote.";
+        document.getElementById("quote-author").innerText = "";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      fetchQuote();
+      fetchRandomCharacter();
+    });
+  </script>
+</body>
+</html>
