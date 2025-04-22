@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FocusMate App</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #c8f2dc, #e0f7fa);
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: start;
+      animation: backgroundShift 10s infinite alternate;
+    }
+
+    @keyframes backgroundShift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    .music-toggle {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+    }
+
+    .app {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      width: 420px;
+      margin-top: 80px;
+      position: relative;
+    }
+
+    h2, h3 {
+      text-align: center;
+    }
+
+    input, select {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .task-list {
+      margin-top: 1rem;
+    }
+
+    .task-item {
+      background: #d9f2e6;
+      padding: 1rem;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+
+    .task-item button {
+      background: #f0ad4e;
+      margin-top: 0.5rem;
+    }
+
+    .xp-bar {
+      background: #fdf6e3;
+      padding: 0.6rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    button {
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      background: #6cbf84;
+      color: white;
+      cursor: pointer;
+      margin-right: 0.5rem;
+    }
+
+    .popup {
+      position: absolute;
+      top: 20%;
+      left: 10%;
+      width: 80%;
+      background: #fff8dc;
+      border: 2px solid #f0c36d;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    #reminder, #task-page, #feedback-page {
+      display: none;
+    }
+
+    .quote {
+      font-style: italic;
+      color: #6b6b6b;
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    .leaderboard {
+      margin-top: 1rem;
+      padding: 0.6rem;
+      background: #e9ecef;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <audio id="background-music" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-sunny.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="music-toggle">
+    <button onclick="toggleMusic()">🎵 Toggle Music</button>
+  </div>
+
+  <div class="app">
+    <div id="home">
+      <h2>FocusMate 🧠</h2>
+      <div class="xp-bar">🔥 XP: <span id="xp-count">0</span></div>
+      <p>Add your task below:</p>
+      <input type="text" id="task-name" placeholder="Task name...">
+      <input type="date" id="due-date">
+      <input type="time" id="focus-time">
+      <button onclick="addTask()">Add Task</button>
+
+      <div class="task-list" id="task-list"></div>
+
+      <div class="leaderboard">
+        <strong>🏆 Friend Leaderboard</strong>
+        <ul>
+          <li>You: <span id="xp-count-lb">0</span> XP</li>
+          <li>Alex: 150 XP</li>
+          <li>Taylor: 90 XP</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="reminder" class="popup">
+      <p>⏰ It's your focus time! Ready to start your task?</p>
+      <button onclick="startTask()">Let’s Go</button>
+      <button onclick="dismissReminder()" style="background:#aaa; color:#000">Maybe Later</button>
+    </div>
+
+    <div id="task-page">
+      <h3>📝 Task Focus Mode</h3>
+      <p id="task-page-text">Focusing on your task...</p>
+      <div class="quote" id="quote-box"></div>
+      <button onclick="goToFeedback()">Mark as Done</button>
+    </div>
+
+    <div id="feedback-page">
+      <h3>🏅 Great Job!</h3>
+      <p>You've earned <strong>50 XP</strong> for completing your task! 🎉</p>
+      <p>Keep the momentum going!</p>
+      <button onclick="backToHome()">Back to Dashboard</button>
+    </div>
+  </div>
+
+  <script>
+    let tasks = [];
+    let currentTask = "";
+    let xp = 0;
+    const quotes = [
+      "Stay focused and never give up!",
+      "You’re doing amazing, keep going!",
+      "Progress, not perfection.",
+      "Small steps every day lead to big changes.",
+      "Your future self will thank you."
+    ];
+
+    function addTask() {
+      const nameInput = document.getElementById('task-name');
+      const dueInput = document.getElementById('due-date');
+      const focusInput = document.getElementById('focus-time');
+
+      const name = nameInput.value;
+      const due = dueInput.value;
+      const focus = focusInput.value;
+
+      if (!name || !due || !focus) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      const task = { name, due, focus };
+      tasks.push(task);
+      renderTasks();
+
+      nameInput.value = '';
+      dueInput.value = '';
+      focusInput.value = '';
+
+      checkReminder(task);
+    }
+
+    function renderTasks() {
+      const list = document.getElementById('task-list');
+      list.innerHTML = "";
+      tasks.forEach((t, index) => {
+        list.innerHTML += `
+          <div class="task-item">
+            <strong>${t.name}</strong><br>
+            Due: ${t.due} | Focus: ${t.focus}<br>
+            <button onclick="editTask(${index})">✏️ Edit</button>
+            <button onclick="deleteTask(${index})">🗑 Delete</button>
+          </div>`;
+      });
+    }
+
+    function editTask(index) {
+      const t = tasks[index];
+      document.getElementById('task-name').value = t.name;
+      document.getElementById('due-date').value = t.due;
+      document.getElementById('focus-time').value = t.focus;
+      tasks.splice(index, 1);
+      renderTasks();
+    }
+
+    function deleteTask(index) {
+      tasks.splice(index, 1);
+      renderTasks();
+    }
+
+    function checkReminder(task) {
+      const now = new Date();
+      const [hour, minute] = task.focus.split(":");
+      const taskTime = new Date();
+      taskTime.setHours(hour);
+      taskTime.setMinutes(minute);
+
+      const delay = taskTime - now;
+      if (delay > 0) {
+        setTimeout(() => showReminder(task), delay);
+      } else {
+        setTimeout(() => showReminder(task), 1000);
+      }
+    }
+
+    function showReminder(task) {
+      currentTask = task.name;
+      document.getElementById('reminder').style.display = 'block';
+    }
+
+    function dismissReminder() {
+      document.getElementById('reminder').style.display = 'none';
+    }
+
+    function startTask() {
+      document.getElementById('reminder').style.display = 'none';
+      document.getElementById('home').style.display = 'none';
+      document.getElementById('task-page').style.display = 'block';
+      document.getElementById('task-page-text').innerText = `You're focusing on: ${currentTask}`;
+      document.getElementById('quote-box').innerText = quotes[Math.floor(Math.random() * quotes.length)];
+    }
+
+    function goToFeedback() {
+      document.getElementById('task-page').style.display = 'none';
+      document.getElementById('feedback-page').style.display = 'block';
+      xp += 50;
+      document.getElementById('xp-count').innerText = xp;
+      document.getElementById('xp-count-lb').innerText = xp;
+    }
+
+    function backToHome() {
+      document.getElementById('feedback-page').style.display = 'none';
+      document.getElementById('home').style.display = 'block';
+    }
+
+    function toggleMusic() {
+      const audio = document.getElementById("background-music");
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+    }
+  </script>
+</body>
+</html>
