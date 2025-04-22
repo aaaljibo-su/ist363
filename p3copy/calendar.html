@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>StarGazer - EONET Meteor Events</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background-color: #0d1b2a;
+      color: #e0e1dd;
+    }
+    .navbar {
+      background-color: #1b263b !important;
+    }
+    .list-group-item {
+      background-color: #415a77 !important;
+      color: #e0e1dd !important;
+      border: none;
+    }
+    h1 {
+      color: #e0e1dd;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">StarGazer</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="explore.html">Explore</a></li>
+        <li class="nav-item"><a class="nav-link" href="visuals.html">Visuals</a></li>
+        <li class="nav-item"><a class="nav-link" href="calendar.html">Calendar</a></li>
+        <li class="nav-item"><a class="nav-link" href="favorites.html">Favorites</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="container mt-5">
+  <h1>Meteor Shower Calendar</h1>
+  <ul class="list-group" id="meteor-list">
+    <li class="list-group-item">Loading meteor data...</li>
+  </ul>
+</main>
+
+<script>
+  const apiUrl = "https://api.allorigins.win/get?url=" + encodeURIComponent("https://www.timeanddate.com/astronomy/meteor-shower/list.html");
+
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      const html = data.contents;
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, "text/html");
+
+      const table = doc.querySelector("table.tb-scroll");
+      const rows = table.querySelectorAll("tbody tr");
+
+      const meteorList = document.getElementById("meteor-list");
+      meteorList.innerHTML = "";
+
+      rows.forEach(row => {
+        const name = row.querySelector("th a")?.textContent.trim();
+        const peak = row.querySelector("td:nth-child(3)")?.textContent.trim();
+
+        if (name && peak) {
+          const li = document.createElement("li");
+          li.className = "list-group-item";
+          li.innerHTML = `<strong>${name}</strong><br><small>Peak: ${peak}</small>`;
+          meteorList.appendChild(li);
+        }
+      });
+    })
+    .catch(err => {
+      console.error("Error fetching meteor data:", err);
+      document.getElementById("meteor-list").innerHTML = '<li class="list-group-item">Failed to load data.</li>';
+    });
+</script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
