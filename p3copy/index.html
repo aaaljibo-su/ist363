@@ -7,10 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
-  body {
-    background-color: #0d1b2a;
-    color: #e0e1dd;
-  }
+  body { background-color: #0d1b2a; color: #e0e1dd; }
+
   .navbar {
     background-color: #1b263b !important;
   }
@@ -45,8 +43,8 @@
       
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="explore.html">Explore</a></li>
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="explore.html">Planets</a></li>
           <li class="nav-item"><a class="nav-link" href="visuals.html">Visuals</a></li>
           <li class="nav-item"><a class="nav-link" href="calendar.html">Calendar</a></li>
           <li class="nav-item"><a class="nav-link" href="favorites.html">Favorites</a></li>
@@ -55,46 +53,47 @@
     </div>
   </nav>
   
-  <main class="container mt-5">
-    <h1>NASA Astronomy Picture of the Day</h1>
-    <p class="lead">Explore a new image from space every day, directly from NASA.</p>
-    <div class="card">
-      <div class="card text-light">
-        <div class="card-body">
-          <h5 class="card-title" id="apod-title">Loading title...</h5>
-          <p class="card-text" id="apod-desc">Loading description...</p>
-          <img id="apod-img" class="img-fluid mt-3" src="" alt="Loading image...">
-        </div>
-      </div>
+  <div class="container mt-5">
+    <h1 class="text-center">NASA Picture of the Day</h1>
+    <div class="card p-4 mt-3">
+      <h2 id="apodTitle"></h2>
+      <img id="apodImage" class="img-fluid mb-3" alt="NASA APOD" />
+      <p id="apodExplanation"></p>
+      <button class="btn btn-warning" onclick="addToFavorites()">⭐ Favorite</button>
     </div>
-  </main>
+  </div>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const apiKey = "kShhsKMOHOtZYsQancvXmzGrcLuAty9SvMuwPFHe";
-      const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
-  
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          document.getElementById('apod-title').textContent = data.title;
-          document.getElementById('apod-desc').textContent = data.explanation;
-  
-          if (data.media_type === "image") {
-            document.getElementById('apod-img').src = data.url;
-            document.getElementById('apod-img').alt = data.title;
-          } else {
-            document.getElementById('apod-img').src = '';
-            document.getElementById('apod-img').alt = 'Media not supported';
-          }
-        })
-        .catch(err => {
-          console.error('Failed to fetch APOD:', err);
-          document.getElementById('apod-title').textContent = "Failed to load APOD";
-          document.getElementById('apod-desc').textContent = "Please try again later.";
-        });
+
+<script>
+  const apiKey = "kShhsKMOHOtZYsQancvXmzGrcLuAty9SvMuwPFHe"; // Replace with your NASA API key
+  let apodData = null;
+
+  fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`)
+    .then(res => res.json())
+    .then(data => {
+      apodData = data;
+      document.getElementById("apodTitle").textContent = data.title;
+      document.getElementById("apodImage").src = data.url;
+      document.getElementById("apodExplanation").textContent = data.explanation;
     });
-  </script>
+
+  function addToFavorites() {
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const alreadySaved = favorites.find(fav => fav.date === apodData.date);
+    if (!alreadySaved) {
+      favorites.push({
+        title: apodData.title,
+        url: apodData.url,
+        explanation: apodData.explanation,
+        date: apodData.date
+      });
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+      alert("Added to favorites!");
+    } else {
+      alert("This picture is already in your favorites.");
+    }
+  }
+</script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

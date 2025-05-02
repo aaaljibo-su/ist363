@@ -2,74 +2,160 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>StarGazer - Explore Stars</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>StarGazer - Planet Explorer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
-  body {
-    background-color: #0d1b2a;
-    color: #e0e1dd;
-  }
-  .navbar {
-    background-color: #1b263b !important;
-  }
-  .card, .list-group-item {
-    background-color: #415a77 !important;
-    color: #e0e1dd !important;
-    border: none;
-  }
-  h1, h2, h3 {
-    color: #e0e1dd;
-  }
-  .text-muted {
-    color: #c8d5e1 !important;
-  }
-  .img-fluid {
-    border-radius: 10px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-  }
-</style>
-
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0d1b2a;
+      color: #e0e1dd;
+    }
+    .navbar {
+      background-color: #1b263b !important;
+    }
+    .card {
+      background-color: #415a77;
+      color: #e0e1dd;
+      border: none;
+      border-radius: 1rem;
+    }
+    .planet-img {
+      width: 100%;
+      max-width: 250px;
+      height: auto;
+      object-fit: contain;
+      margin: 1rem auto;
+      display: block;
+    }
+  </style>
 </head>
-<body class="bg-dark text-light">
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">StarGazer</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="#">Planets</a></li>
+          <li class="nav-item"><a class="nav-link" href="visuals.html">Visuals</a></li>
+          <li class="nav-item"><a class="nav-link" href="calendar.html">Calendar</a></li>
+          <li class="nav-item"><a class="nav-link" href="favorites.html">Favorites</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">StarGazer</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="explore.html">Explore</a></li>
-        <li class="nav-item"><a class="nav-link" href="visuals.html">Visuals</a></li>
-        <li class="nav-item"><a class="nav-link" href="calendar.html">Calendar</a></li>
-        <li class="nav-item"><a class="nav-link" href="favorites.html">Favorites</a></li>
+  <main class="container py-5">
+    <h1 class="text-center mb-4">Planet Explorer</h1>
+    <div class="input-group mb-4 mx-auto" style="max-width: 500px;">
+      <input type="text" id="planetInput" class="form-control form-control-lg" placeholder="Search planet (e.g., Mars)">
+      <button class="btn btn-primary btn-lg" onclick="searchPlanet()">Search</button>
+    </div>
+
+    <div id="planetInfo" class="card p-4 d-none">
+      <h3 id="planetName" class="text-center"></h3>
+      <img id="planetImage" class="planet-img" />
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-transparent"><strong>Type:</strong> <span id="planetType"></span></li>
+        <li class="list-group-item bg-transparent"><strong>Surface Temperature:</strong> <span id="surfaceTemp"></span></li>
+        <li class="list-group-item bg-transparent"><strong>Gravity (Earth = 1):</strong> <span id="gravity"></span></li>
+        <li class="list-group-item bg-transparent"><strong>Rings:</strong> <span id="rings"></span></li>
+        <li class="list-group-item bg-transparent"><strong>Moons:</strong> <span id="moons"></span></li>
       </ul>
     </div>
-  </div>
-</nav>
-
-  <main class="container mt-5">
-    <h1>Explore the Star Catalog</h1>
-    <input class="form-control mb-3" type="text" placeholder="Search for a star or constellation...">
-    <table class="table table-bordered table-dark">
-      <thead>
-        <tr><th>Name</th><th>Brightness</th><th>Distance</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Star A</td><td>1.0</td><td>50 ly</td></tr>
-        <tr><td>Star B</td><td>2.3</td><td>120 ly</td></tr>
-      </tbody>
-    </table>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const planetData = {
+      Mercury: {
+        type: "Terrestrial",
+        temp: "430°C (day) / -180°C (night)",
+        gravity: "0.38",
+        rings: "None",
+        moons: "None",
+        img: "https://upload.wikimedia.org/wikipedia/commons/4/4a/Mercury_in_true_color.jpg"
+      },
+      Venus: {
+        type: "Terrestrial",
+        temp: "465°C",
+        gravity: "0.9",
+        rings: "None",
+        moons: "None",
+        img: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Venus-real_color.jpg"
+      },
+      Earth: {
+        type: "Terrestrial",
+        temp: "15°C avg",
+        gravity: "1",
+        rings: "None",
+        moons: "1 (Moon)",
+        img: "https://upload.wikimedia.org/wikipedia/commons/9/97/The_Earth_seen_from_Apollo_17.jpg"
+      },
+      Mars: {
+        type: "Terrestrial",
+        temp: "-60°C avg",
+        gravity: "0.38",
+        rings: "None",
+        moons: "2 (Phobos, Deimos)",
+        img: "https://upload.wikimedia.org/wikipedia/commons/0/02/OSIRIS_Mars_true_color.jpg"
+      },
+      Jupiter: {
+        type: "Jovian (Gas Giant)",
+        temp: "-145°C",
+        gravity: "2.4",
+        rings: "Yes (faint)",
+        moons: "80+",
+        img: "https://upload.wikimedia.org/wikipedia/commons/e/e2/Jupiter.jpg"
+      },
+      Saturn: {
+        type: "Jovian (Gas Giant)",
+        temp: "-178°C",
+        gravity: "1.1",
+        rings: "Yes (extensive)",
+        moons: "80+",
+        img: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Saturn_during_Equinox.jpg"
+      },
+      Uranus: {
+        type: "Jovian (Ice Giant)",
+        temp: "-224°C",
+        gravity: "0.89",
+        rings: "Yes (faint)",
+        moons: "27",
+        img: "https://upload.wikimedia.org/wikipedia/commons/3/3d/Uranus2.jpg"
+      },
+      Neptune: {
+        type: "Jovian (Ice Giant)",
+        temp: "-214°C",
+        gravity: "1.14",
+        rings: "Yes (faint)",
+        moons: "14",
+        img: "https://upload.wikimedia.org/wikipedia/commons/5/56/Neptune_Full.jpg"
+      }
+    };
 
+    function searchPlanet() {
+      const input = document.getElementById('planetInput').value.trim();
+      const planet = planetData[input];
+
+      if (planet) {
+        document.getElementById('planetName').textContent = input;
+        document.getElementById('planetType').textContent = planet.type;
+        document.getElementById('surfaceTemp').textContent = planet.temp;
+        document.getElementById('gravity').textContent = planet.gravity;
+        document.getElementById('rings').textContent = planet.rings;
+        document.getElementById('moons').textContent = planet.moons;
+        document.getElementById('planetImage').src = planet.img;
+
+        document.getElementById('planetInfo').classList.remove('d-none');
+      } else {
+        alert("Planet not found. Please enter a valid name (e.g., Mars).");
+      }
+    }
+  </script>
 </body>
 </html>

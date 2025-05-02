@@ -36,9 +36,9 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="explore.html">Explore</a></li>
+        <li class="nav-item"><a class="nav-link" href="explore.html">Planets</a></li>
         <li class="nav-item"><a class="nav-link" href="visuals.html">Visuals</a></li>
-        <li class="nav-item"><a class="nav-link" href="calendar.html">Calendar</a></li>
+        <li class="nav-item"><a class="nav-link active" href="calendar.html">Calendar</a></li>
         <li class="nav-item"><a class="nav-link" href="favorites.html">Favorites</a></li>
       </ul>
     </div>
@@ -46,49 +46,28 @@
 </nav>
 
 <main class="container mt-5">
-  <h1>Meteor Shower Calendar</h1>
-  <ul class="list-group" id="meteor-list">
-    <li class="list-group-item">Loading meteor data...</li>
-  </ul>
+  <h1>Upcoming Space Launches</h1>
+  <ul class="list-group" id="launch-list"><li class="list-group-item">Loading...</li></ul>
 </main>
-
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const url = "https://api.allorigins.win/raw?url=" +
-      encodeURIComponent("https://www.timeanddate.com/astronomy/meteor-shower/list.html");
-
-    fetch(url)
-      .then(response => response.text())
-      .then(html => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, "text/html");
-        const table = doc.querySelector("table.tb-scroll");
-        const rows = table?.querySelectorAll("tbody tr") || [];
-
-        const list = document.getElementById("meteor-list");
-        list.innerHTML = "";
-
-        rows.forEach(row => {
-          const name = row.querySelector("th a")?.textContent.trim();
-          const peak = row.querySelector("td:nth-child(3)")?.textContent.trim();
-          if (name && peak) {
-            const li = document.createElement("li");
-            li.className = "list-group-item";
-            li.innerHTML = `<strong>${name}</strong><br><small>Peak: ${peak}</small>`;
-            list.appendChild(li);
-          }
-        });
-
-        if (rows.length === 0) {
-          list.innerHTML = '<li class="list-group-item">No events found. Site layout may have changed.</li>';
-        }
-      })
-      .catch(err => {
-        console.error("Fetch failed:", err);
-        document.getElementById("meteor-list").innerHTML =
-          '<li class="list-group-item">Failed to load meteor data.</li>';
+  fetch("https://ll.thespacedevs.com/2.2.0/launch/upcoming/?limit=5")
+    .then(res => res.json())
+    .then(data => {
+      const list = document.getElementById("launch-list");
+      list.innerHTML = "";
+      data.results.forEach(launch => {
+        const li = document.createElement("li");
+        li.className = "list-group-item";
+        li.innerHTML = `<strong>${launch.name}</strong><br>
+          ${new Date(launch.net).toLocaleString()}<br>
+          <em>${launch.status.name}</em>`;
+        list.appendChild(li);
       });
-  });
+    })
+    .catch(err => {
+      document.getElementById("launch-list").innerHTML = '<li class="list-group-item">Failed to load launches.</li>';
+      console.error(err);
+    });
 </script>
 
   
